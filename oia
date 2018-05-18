@@ -1,0 +1,16 @@
+#!/bin/bash
+
+ if [ "$#" -eq  "0" ]
+    then
+      echo "No file/folder name given for fuzzy search"
+  else
+      cd ~
+      fuzzySearchSelect=$(fd $1 | fzf)
+      if [ ! -z $fuzzySearchSelect ]
+         then
+           echo opening $fuzzySearchSelect in atom
+           atom $fuzzySearchSelect
+      else
+          echo "No file/folder chosen in fuzzy search"
+      fi
+  fi

@@ -1,0 +1,27 @@
+#!/bin/bash
+
+getCurrentWorkingDirectory(){
+  echo "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+}
+
+if [ "$#" -eq  "0" ]
+  then
+    echo "No folder name given for fuzzy search"
+else
+    currentWorkingDir=$(getCurrentWorkingDirectory)
+    cd ~
+    fuzzySearchSelect=$(fd $1 | fzf)
+    if [ ! -z $fuzzySearchSelect ]
+        then
+          if [ -d "$fuzzySearchSelect" ]
+            then
+              cd $fuzzySearchSelect
+          else
+            echo "selected option is not a folder"
+            cd $currentWorkingDir
+          fi
+    else
+        echo "No folder chosen in fuzzy search"
+        cd $currentWorkingDir
+    fi
+fi
