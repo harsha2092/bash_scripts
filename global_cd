@@ -17,8 +17,8 @@ else
             then
               cd $fuzzySearchSelect
           else
-            echo "selected option is not a folder"
-            cd $currentWorkingDir
+            dirContainingFolder=$(dirname "${fuzzySearchSelect}")
+            cd $dirContainingFolder
           fi
     else
         echo "No folder chosen in fuzzy search"
